@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ASCII Art Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            z-index: 1;
+        }
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>ASCII Art Generator</h1>
+    <input type="text" id="userInput" placeholder="Enter your text here">
+    <br>
+    <div class="dropdown">
+        <button>Choose Font Style</button>
+        <div class="dropdown-content">
+            <a href="#" onclick="changeFont('Courier')">Courier</a>
+            <a href="#" onclick="changeFont('Monospace')">Monospace</a>
+            <a href="#" onclick="changeFont('Sans-serif')">Sans-serif</a>
+        </div>
+    </div>
+    <br>
+    <button onclick="generateArt()">Generate ASCII Art</button>
+    <pre id="asciiArt"></pre>
+
+    <script>
+        var font = 'Monospace';
+
+        function changeFont(newFont) {
+            font = newFont;
+        }
+
+        function generateArt() {
+            var input = document.getElementById('userInput').value;
+            var asciiArt = '';
+            for (var i = 0; i < input.length; i++) {
+                asciiArt += String.fromCharCode(input.charCodeAt(i) + 8486);
+            }
+            var asciiArtElement = document.getElementById('asciiArt');
+            asciiArtElement.style.fontFamily = font;
+            asciiArtElement.innerText = asciiArt;
+        }
+    </script>
+</body>
+</html>
